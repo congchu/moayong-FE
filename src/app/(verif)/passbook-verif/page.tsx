@@ -40,26 +40,19 @@ const PassbookVerifiPage = () => {
     const file = event.target.files?.[0];
     if (file) {
       setSelectedImage(file);
-      console.log("file", file);
     }
   };
 
   useEffect(() => {
-    if (selectedImage) {
-      console.log(selectedImage);
-      mutatePaymentVerification();
-    }
+    const verifyImage = async () => {
+      if (selectedImage) {
+        console.log(selectedImage);
+        await mutatePaymentVerification();
+        router.push("/passbook-verif/screen");
+      }
+    };
+    verifyImage();
   }, [selectedImage]);
-
-  //       router.push("/passbook-verif/screen");
-  //     } catch (error) {
-  //       console.error("Error uploading passbook image:", error);
-  //       alert("통장 인증에 실패했습니다. 다시 시도해주세요.");
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   }
-  // };
 
   return (
     <div className="w-full mx-auto flex flex-col items-center h-screen min-h-screen">
